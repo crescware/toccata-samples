@@ -16,7 +16,7 @@ module.exports = exports['default'];
 
 // same as the following ES6
 // export default from './lib/toccata';
-},{"./lib/toccata":4}],2:[function(require,module,exports){
+},{"./lib/toccata":5}],2:[function(require,module,exports){
 'use strict';
 exports.document = (typeof window === 'object') ? window.document : {};
 
@@ -60,6 +60,15 @@ function operatingMode(angular) {
 exports.default = operatingMode;
 
 },{}],4:[function(require,module,exports){
+'use strict';
+function camelize(s) {
+    return s.replace(/(\-|_|\s)+(.)?/g, function (mathc, sep, c) {
+        return (c ? c.toUpperCase() : '');
+    });
+}
+exports.camelize = camelize;
+
+},{}],5:[function(require,module,exports){
 /**
  * Cresc Toccata
  * @copyright © 2015 Crescware
@@ -281,8 +290,9 @@ var Toccata = (function () {
 })();
 exports.Toccata = Toccata;
 
-},{"../package.json":7,"./operating-mode":3,"./v1/v1":5,"./v2/v2":6}],5:[function(require,module,exports){
+},{"../package.json":8,"./operating-mode":3,"./v1/v1":6,"./v2/v2":7}],6:[function(require,module,exports){
 'use strict';
+var string_utils_1 = require('../string-utils');
 var browser_dependencies_1 = require('../browser-dependencies');
 var ToccataForV1 = (function () {
     function ToccataForV1() {
@@ -320,12 +330,7 @@ var ToccataForV1 = (function () {
                 if (!component._toccataDdoCache) {
                     throw new Error('You must first use the @View annotation');
                 }
-                function camelize(s) {
-                    return s.replace(/(\-|_|\s)+(.)?/g, function (mathc, sep, c) {
-                        return (c ? c.toUpperCase() : '');
-                    });
-                }
-                component._toccataSelectorCache = camelize(def.selector);
+                component._toccataSelectorCache = string_utils_1.camelize(def.selector);
                 var ddo = component._toccataDdoCache;
                 ddo.restrict = 'E';
                 ddo.controller = component;
@@ -395,7 +400,7 @@ var ToccataForV1 = (function () {
 })();
 exports.default = ToccataForV1;
 
-},{"../browser-dependencies":2}],6:[function(require,module,exports){
+},{"../browser-dependencies":2,"../string-utils":4}],7:[function(require,module,exports){
 'use strict';
 var ToccataForV2 = (function () {
     function ToccataForV2() {
@@ -478,11 +483,11 @@ var ToccataForV2 = (function () {
 })();
 exports.default = ToccataForV2;
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 module.exports={
   "name": "toccata",
   "description": "Cresc Toccata is the utility for AngularJS >= 1.3.14 / Angular 2",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "author": "Crescware",
   "bugs": {
     "url": "https://github.com/crescware/toccata/issues"
@@ -538,7 +543,7 @@ module.exports={
   }
 }
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 module.exports = require('./index').toccata;
-},{"./index":1}]},{},[8])(8)
+},{"./index":1}]},{},[9])(9)
 });
